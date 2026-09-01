@@ -1,0 +1,40 @@
+SOURCE_TYPE: SEBI Annual Filing (Synthetic)
+SYMBOL: RELIANCE
+FISCAL_YEAR: 2025
+FILED_WITH: Securities and Exchange Board of India
+
+MANAGEMENT DISCUSSION AND ANALYSIS
+
+Reliance Industries reported consolidated revenue growth of 14.8% year-on-year for
+fiscal 2025, driven primarily by the retail and digital services segments. The energy
+and petrochemicals segment showed moderate growth of 6.2%, impacted by softer refining
+margins in the second half of the year.
+
+The company's consolidated net debt-to-equity ratio stood at 0.32 as of March 2025,
+down from 0.41 the previous year, reflecting continued deleveraging following the
+completion of the telecom infrastructure buildout cycle.
+
+RISK FACTORS
+
+1. Refining margins remain exposed to global crude price volatility and geopolitical
+   supply disruptions, which could compress petrochemical segment profitability.
+2. The retail segment faces intensifying competition from quick-commerce entrants,
+   which may pressure same-store growth rates in metro markets.
+3. Regulatory changes to spectrum pricing and tariff structures in the telecom
+   sector could affect digital services margins in the coming fiscal year.
+4. Currency depreciation against the US dollar increases the cost of imported
+   crude feedstock and could compress near-term margins if hedges are insufficient.
+
+CAPITAL EXPENDITURE AND OUTLOOK
+
+The board has approved continued investment in green energy and battery storage
+manufacturing capacity, with commissioning of the first phase expected in late 2026.
+Management reiterated guidance for double-digit consolidated EBITDA growth for fiscal
+2026, contingent on stable refining spreads and continued retail footprint expansion.
+
+CONTINGENT LIABILITIES
+
+The company disclosed contingent liabilities of approximately INR 18,400 crore related
+to ongoing tax assessment disputes and bank guarantees extended to subsidiaries. Legal
+counsel has assessed the probability of material cash outflow from these disputes as
+low based on precedent rulings in similar matters.

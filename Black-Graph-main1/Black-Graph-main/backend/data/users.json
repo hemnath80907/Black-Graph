@@ -1,0 +1,29 @@
+{
+  "U001": {
+    "user_id": "U001",
+    "display_name": "Anita (Conservative, first-time investor)",
+    "risk_tolerance": "LOW",
+    "investment_goal": "LONG_TERM_GROWTH",
+    "investment_horizon": "LONG_TERM",
+    "portfolio": {"RELIANCE": 50000, "TCS": 30000, "INFY": 20000},
+    "behavior": {"trades_last_30_days": 3, "average_holding_days": 180, "portfolio_changes": 1}
+  },
+  "U002": {
+    "user_id": "U002",
+    "display_name": "Rahul (Balanced, salaried professional)",
+    "risk_tolerance": "MODERATE",
+    "investment_goal": "WEALTH_ACCUMULATION",
+    "investment_horizon": "MEDIUM_TERM",
+    "portfolio": {"RELIANCE": 40000, "TCS": 40000, "INFY": 20000},
+    "behavior": {"trades_last_30_days": 8, "average_holding_days": 45, "portfolio_changes": 4}
+  },
+  "U003": {
+    "user_id": "U003",
+    "display_name": "Priya (Aggressive, active F&O trader)",
+    "risk_tolerance": "HIGH",
+    "investment_goal": "SHORT_TERM_GAINS",
+    "investment_horizon": "SHORT_TERM",
+    "portfolio": {"RELIANCE": 70000, "TCS": 15000, "INFY": 15000},
+    "behavior": {"trades_last_30_days": 24, "average_holding_days": 4, "portfolio_changes": 12}
+  }
+}

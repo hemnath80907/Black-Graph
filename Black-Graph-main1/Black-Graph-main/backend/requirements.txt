@@ -1,0 +1,15 @@
+fastapi==0.115.0
+uvicorn[standard]==0.30.6
+pydantic==2.9.2
+langgraph==0.2.34
+
+# Notes:
+# - The retrieval layer (retrieval/vector_store.py) uses only the Python
+#   standard library (math, re, collections) so it has no extra dependency
+#   and keeps working even if a heavier embeddings/vector-DB integration is
+#   unavailable.
+# - langgraph is used for parallel agent orchestration. If it is not
+#   installed, orchestrator.py automatically falls back to a
+#   ThreadPoolExecutor-based parallel dispatch with an identical contract,
+#   so the API still runs.
+# - Session/performance logging uses sqlite3 (Python standard library).

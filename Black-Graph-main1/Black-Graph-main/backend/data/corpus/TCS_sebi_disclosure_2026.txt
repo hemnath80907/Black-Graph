@@ -1,0 +1,22 @@
+SOURCE_TYPE: SEBI Material Disclosure (Synthetic)
+SYMBOL: TCS
+DISCLOSURE_DATE: FY2026 Q1
+FILED_WITH: Securities and Exchange Board of India, under Regulation 30
+
+SUBJECT: Large Deal Wins and Deal Pipeline Update
+
+Tata Consultancy Services disclosed total contract value (TCV) bookings of USD 10.2
+billion for the quarter, up from USD 9.4 billion in the prior-year quarter. Management
+attributed the increase to renewed momentum in the manufacturing and retail verticals,
+partially offsetting continued softness in North American discretionary BFSI spend.
+
+The company also disclosed a definitive agreement to acquire a mid-sized cloud
+engineering consultancy for an undisclosed sum, expected to close within the current
+fiscal year subject to customary regulatory approvals. The transaction is not expected
+to have a material impact on near-term earnings per share.
+
+Attrition for the trailing twelve months was reported at 12.3%, within the company's
+targeted band and consistent with sequential improvement over the past four quarters.
+
+No material litigation, regulatory action, or going-concern matters were disclosed in
+this filing.

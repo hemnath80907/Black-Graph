@@ -1,0 +1,37 @@
+SOURCE_TYPE: Earnings Call Transcript (Synthetic)
+SYMBOL: RELIANCE
+QUARTER: Q2 FY2026
+PARTICIPANTS: CFO, Head of Investor Relations, Sell-side Analysts
+
+CFO OPENING REMARKS
+
+Our consolidated revenue for the quarter grew 12.3% year-on-year, slightly ahead of
+street estimates. Retail segment same-store sales growth came in at 9.1%, moderating
+from the prior quarter as quick-commerce competition intensified in top metros. Digital
+services ARPU improved to INR 203, supported by continued 5G upsell.
+
+ANALYST Q&A
+
+Analyst: Can you comment on refining margins given the recent crude price volatility?
+
+CFO: Refining margins compressed by roughly 80 basis points quarter-on-quarter due to
+weaker gasoline cracks. We expect this to partially normalize in the second half as
+Middle East supply stabilizes, but we are not providing precise guidance given the
+volatility.
+
+Analyst: How should we think about leverage going into the green energy capex cycle?
+
+CFO: Net debt-to-equity remains comfortable at 0.30. We intend to fund the majority of
+green energy capex through internal accruals and do not anticipate a material increase
+in leverage over the next two fiscal years.
+
+Analyst: Any update on the tax dispute disclosed in the annual filing?
+
+CFO: There is no material change. We continue to believe the probability of adverse
+cash outflow is low, consistent with our prior disclosure.
+
+CLOSING REMARKS
+
+Management reiterated full-year guidance for double-digit EBITDA growth, while flagging
+that near-term retail growth may moderate further before stabilizing in the fourth
+quarter.

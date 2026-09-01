@@ -1,0 +1,38 @@
+SOURCE_TYPE: Earnings Call Transcript (Synthetic)
+SYMBOL: INFY
+QUARTER: Q1 FY2026
+PARTICIPANTS: CEO, CFO, Sell-side Analysts
+
+CEO OPENING REMARKS
+
+Revenue for the quarter grew 4.2% year-on-year in constant currency, at the lower end
+of our guided range. Large deal TCV came in at USD 2.3 billion, down from USD 2.8
+billion in the prior quarter, reflecting elongated decision cycles among enterprise
+clients in North America and Europe.
+
+CFO REMARKS ON MARGINS
+
+Operating margin for the quarter was 21.1%, down 40 basis points sequentially due to
+wage hikes effective this quarter and continued investment in generative AI delivery
+capabilities. We expect margin to stabilize in the 20.5% to 22.5% band for the
+remainder of the fiscal year.
+
+ANALYST Q&A
+
+Analyst: Are you seeing any signs of discretionary spend recovery?
+
+CFO: We are seeing early, uneven signs of recovery in select verticals such as retail
+and manufacturing, but BFSI discretionary spend in North America remains muted. It is
+too early to call this a broad-based recovery.
+
+Analyst: How is the debt and balance sheet positioned given the buyback program?
+
+CFO: We remain effectively debt-free at the consolidated level. The current buyback
+program is being funded entirely from existing cash and investment balances without
+any incremental borrowing.
+
+GUIDANCE
+
+Management revised full-year constant-currency revenue growth guidance to a range of
+3.5% to 5.0%, down from the previous range of 4.5% to 6.5%, citing continued
+macroeconomic uncertainty in key client geographies.

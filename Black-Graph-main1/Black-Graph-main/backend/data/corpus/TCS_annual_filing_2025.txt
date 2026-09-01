@@ -1,0 +1,39 @@
+SOURCE_TYPE: SEBI Annual Filing (Synthetic)
+SYMBOL: TCS
+FISCAL_YEAR: 2025
+FILED_WITH: Securities and Exchange Board of India
+
+MANAGEMENT DISCUSSION AND ANALYSIS
+
+Tata Consultancy Services reported constant-currency revenue growth of 7.1% for fiscal
+2025, with the BFSI vertical contributing the largest share of incremental growth.
+Operating margin held steady at 24.6%, supported by continued utilization improvements
+and a stable pyramid structure.
+
+The company remains debt-free at the consolidated level, with total debt-to-equity of
+0.02, consisting solely of lease liabilities under applicable accounting standards.
+
+RISK FACTORS
+
+1. Discretionary technology spending among North American BFSI clients has shown signs
+   of deceleration, which could weigh on near-term deal bookings.
+2. Wage inflation for niche digital and AI talent remains a margin pressure point,
+   particularly in competitive geographies such as the United States and Europe.
+3. Currency movements in the GBP and EUR pose translation risk given the company's
+   European client concentration.
+4. Visa policy changes in key onshore markets could increase delivery costs if
+   onsite-offshore ratios need to shift.
+
+CAPITAL ALLOCATION
+
+The board approved a share buyback program alongside the existing dividend policy,
+reflecting continued confidence in free cash flow generation. The company maintains a
+policy of returning at least 80% of free cash flow to shareholders over a rolling
+period, subject to board approval each year.
+
+CONTINGENT LIABILITIES
+
+Contingent liabilities of approximately INR 12,100 crore were disclosed, primarily
+related to indirect tax matters across multiple jurisdictions. Management does not
+consider any of these matters individually material to the consolidated financial
+position.

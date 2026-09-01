@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Black-Graph — Multi-Agent Financial Intelligence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-void: #0a0d12;
+    --panel: #12161d;
+    --panel-raised: #1a2029;
+    --hair: #262e3a;
+    --hair-bright: #384252;
+    --text-primary: #e7ebf0;
+    --text-muted: #8792a2;
+    --text-faint: #57616f;
+    --accent: #4fd1c5;
+    --accent-dim: #2a5a55;
+    --buy: #34d399;
+    --sell: #f0616b;
+    --hold: #e8b74b;
+    --font-display: 'Fraunces', serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg-void);
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+    font-size: 13px;
+    line-height: 1.55;
+  }
+
+  a { color: var(--accent); }
+
+  .layout {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    min-height: 100vh;
+  }
+
+  /* ---------------- Sidebar ---------------- */
+
+  .sidebar {
+    border-right: 1px solid var(--hair);
+    padding: 24px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    background: linear-gradient(180deg, #0d1117 0%, #0a0d12 100%);
+  }
+
+  .brand {
+    font-family: var(--font-display);
+    font-size: 22px;
+    letter-spacing: 0.2px;
+    color: var(--text-primary);
+  }
+  .brand span { color: var(--accent); }
+  .brand-sub {
+    color: var(--text-faint);
+    font-size: 11px;
+    margin-top: 4px;
+  }
+
+  .field label {
+    display: block;
+    color: var(--text-muted);
+    font-size: 11px;
+    margin-bottom: 6px;
+  }
+  .field select, .field input {
+    width: 100%;
+    background: var(--panel-raised);
+    border: 1px solid var(--hair);
+    color: var(--text-primary);
+    padding: 9px 10px;
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+  }
+  .field select:focus, .field input:focus {
+    outline: none;
+    border-color: var(--accent-dim);
+  }
+
+  .field-group {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--hair);
+  }
+
+  .run-btn {
+    background: var(--accent);
+    color: #06211e;
+    border: none;
+    padding: 11px 14px;
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 12.5px;
+    cursor: pointer;
+    letter-spacing: 0.3px;
+  }
+  .run-btn:hover { background: #6adfd4; }
+  .run-btn:disabled { background: var(--hair-bright); color: var(--text-faint); cursor: wait; }
+
+  .scenario-note {
+    font-size: 11px;
+    color: var(--text-faint);
+    line-height: 1.5;
+  }
+
+  .engine-tag {
+    font-size: 10.5px;
+    color: var(--text-faint);
+    border: 1px solid var(--hair);
+    padding: 6px 8px;
+    margin-top: auto;
+  }
+
+  /* ---------------- Main ---------------- */
+
+  .main { padding: 28px 32px 60px; max-width: 1180px; }
+
+  .hero {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 34px;
+    align-items: center;
+    padding: 26px 0 30px;
+    border-bottom: 1px solid var(--hair);
+    margin-bottom: 26px;
+  }
+
+  .hero-signal {
+    font-family: var(--font-display);
+    font-size: 64px;
+    line-height: 1;
+  }
+  .hero-signal.BUY { color: var(--buy); }
+  .hero-signal.SELL { color: var(--sell); }
+  .hero-signal.HOLD { color: var(--hold); }
+
+  .hero-meta { display: flex; flex-direction: column; gap: 6px; }
+  .hero-symbol { font-family: var(--font-display); font-size: 22px; }
+  .hero-confidence { color: var(--text-muted); font-size: 12.5px; }
+  .hero-decision { color: var(--text-primary); font-size: 12.5px; max-width: 640px; margin-top: 6px; }
+  .sparkline { margin-top: 8px; }
+
+  .scenario-banner {
+    display: none;
+    border: 1px solid var(--hold);
+    color: var(--hold);
+    background: rgba(232,183,75,0.08);
+    padding: 10px 14px;
+    font-size: 11.5px;
+    margin-bottom: 20px;
+  }
+  .scenario-banner.active { display: block; }
+
+  h2.section-title {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-faint);
+    margin: 34px 0 12px;
+  }
+
+  .agent-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+  @media (max-width: 980px) { .agent-grid { grid-template-columns: repeat(2, 1fr); } }
+
+  .agent-card {
+    border: 1px solid var(--hair);
+    background: var(--panel);
+    padding: 14px 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .agent-card.degraded {
+    border-color: var(--sell);
+    background: repeating-linear-gradient(135deg, var(--panel), var(--panel) 8px, #1a1214 8px, #1a1214 16px);
+    opacity: 0.85;
+  }
+  .agent-name { font-size: 11.5px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.6px; }
+  .agent-signal { font-family: var(--font-display); font-size: 26px; }
+  .agent-signal.BUY { color: var(--buy); }
+  .agent-signal.SELL { color: var(--sell); }
+  .agent-signal.HOLD { color: var(--hold); }
+  .agent-confidence { font-size: 11px; color: var(--text-faint); }
+  .agent-reasons { list-style: none; margin: 4px 0 0; padding: 0; display: flex; flex-direction: column; gap: 5px; }
+  .agent-reasons li { font-size: 11px; color: var(--text-muted); padding-left: 10px; position: relative; }
+  .agent-reasons li::before { content: '·'; position: absolute; left: 0; color: var(--accent); }
+  .degraded-tag { font-size: 10px; color: var(--sell); letter-spacing: 0.5px; }
+
+  .two-col { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 20px; }
+  @media (max-width: 980px) { .two-col { grid-template-columns: 1fr; } }
+
+  .panel {
+    border: 1px solid var(--hair);
+    background: var(--panel);
+    padding: 16px 18px 18px;
+  }
+
+  .citation {
+    border-left: 2px solid var(--accent);
+    padding: 8px 0 8px 12px;
+    margin-bottom: 12px;
+  }
+  .citation:last-child { margin-bottom: 0; }
+  .citation-source { font-size: 11px; color: var(--accent); }
+  .citation-score { font-size: 10.5px; color: var(--text-faint); margin-left: 8px; }
+  .citation-snippet { font-size: 11.5px; color: var(--text-muted); margin-top: 4px; }
+  .no-citations { font-size: 11.5px; color: var(--text-faint); }
+
+  .chain-list { list-style: none; margin: 0; padding: 0; counter-reset: step; }
+  .chain-list li {
+    font-size: 11.5px;
+    color: var(--text-muted);
+    padding: 7px 0 7px 26px;
+    position: relative;
+    border-bottom: 1px solid var(--hair);
+  }
+  .chain-list li:last-child { border-bottom: none; }
+  .chain-list li::before {
+    counter-increment: step;
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    top: 7px;
+    width: 16px;
+    height: 16px;
+    font-size: 9.5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent);
+    border: 1px solid var(--accent-dim);
+  }
+
+  .risk-row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid var(--hair); font-size: 12px; }
+  .risk-row:last-child { border-bottom: none; }
+  .risk-row .k { color: var(--text-muted); }
+  .risk-row .v { color: var(--text-primary); }
+  .risk-badge { font-size: 10.5px; padding: 2px 6px; border: 1px solid var(--hair-bright); }
+  .risk-badge.LOW { color: var(--buy); border-color: var(--buy); }
+  .risk-badge.MODERATE { color: var(--hold); border-color: var(--hold); }
+  .risk-badge.HIGH { color: var(--sell); border-color: var(--sell); }
+
+  .guidance-list, .warning-list { list-style: none; margin: 10px 0 0; padding: 0; }
+  .guidance-list li { font-size: 11.5px; color: var(--text-muted); padding: 4px 0 4px 12px; position: relative; }
+  .guidance-list li::before { content: '›'; position: absolute; left: 0; color: var(--accent); }
+  .warning-list li { font-size: 11.5px; color: var(--hold); padding: 4px 0 4px 12px; position: relative; }
+  .warning-list li::before { content: '!'; position: absolute; left: 0; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 11.5px; }
+  th { text-align: left; color: var(--text-faint); font-weight: 500; text-transform: uppercase; font-size: 10px; letter-spacing: 0.5px; padding: 6px 8px; border-bottom: 1px solid var(--hair-bright); }
+  td { padding: 7px 8px; border-bottom: 1px solid var(--hair); color: var(--text-muted); }
+  td.signal-BUY { color: var(--buy); }
+  td.signal-SELL { color: var(--sell); }
+  td.signal-HOLD { color: var(--hold); }
+
+  .metrics-strip { display: flex; gap: 24px; margin-bottom: 14px; flex-wrap: wrap; }
+  .metric { display: flex; flex-direction: column; gap: 2px; }
+  .metric .num { font-family: var(--font-display); font-size: 22px; color: var(--accent); }
+  .metric .label { font-size: 10.5px; color: var(--text-faint); }
+
+  .empty-state {
+    color: var(--text-faint);
+    font-size: 12.5px;
+    padding: 60px 0;
+    text-align: center;
+    border: 1px dashed var(--hair);
+  }
+
+  .footer-note {
+    margin-top: 40px;
+    padding-top: 16px;
+    border-top: 1px solid var(--hair);
+    color: var(--text-faint);
+    font-size: 10.5px;
+  }
+</style>
+</head>
+<body>
+
+<div class="layout">
+
+  <aside class="sidebar">
+    <div>
+      <div class="brand">Black<span>-</span>Graph</div>
+      <div class="brand-sub">Multi-agent financial intelligence for retail investors</div>
+    </div>
+
+    <div class="field-group">
+      <div class="field">
+        <label for="apiBase">API base URL</label>
+        <input id="apiBase" type="text" value="http://localhost:8000" />
+      </div>
+      <div class="field">
+        <label for="symbolSelect">Symbol</label>
+        <select id="symbolSelect"></select>
+      </div>
+      <div class="field">
+        <label for="userSelect">Investor profile</label>
+        <select id="userSelect"></select>
+      </div>
+      <div class="field">
+        <label for="scenarioSelect">Degraded-data scenario</label>
+        <select id="scenarioSelect"></select>
+        <div class="scenario-note">Simulates a missing feed or conflicting signal, so you can see the pipeline degrade gracefully instead of failing.</div>
+      </div>
+    </div>
+
+    <button class="run-btn" id="runBtn">Run analysis</button>
+    <div id="statusLine" class="scenario-note"></div>
+
+    <div class="engine-tag" id="engineTag">orchestration engine: —</div>
+  </aside>
+
+  <main class="main">
+
+    <div class="scenario-banner" id="scenarioBanner"></div>
+
+    <div id="results">
+      <div class="empty-state">Choose a symbol and investor profile, then run an analysis.</div>
+    </div>
+
+    <div class="footer-note">
+      Signals are generated by rule-based agents over simulated market data and a synthetic document
+      corpus for demonstration purposes. Nothing here is investment advice.
+    </div>
+  </main>
+
+</div>
+
+<script>
+const $ = (id) => document.getElementById(id);
+
+function apiBase() { return $('apiBase').value.replace(/\/$/, ''); }
+
+async function loadOptions() {
+  const base = apiBase();
+  try {
+    const [symbols, users, scenarios, root] = await Promise.all([
+      fetch(`${base}/api/symbols`).then(r => r.json()),
+      fetch(`${base}/api/users`).then(r => r.json()),
+      fetch(`${base}/api/scenarios`).then(r => r.json()),
+      fetch(`${base}/`).then(r => r.json()),
+    ]);
+
+    $('symbolSelect').innerHTML = symbols.map(s => `<option value="${s.symbol}">${s.symbol} — ${s.name}</option>`).join('');
+    $('userSelect').innerHTML = users.map(u => `<option value="${u.user_id}">${u.display_name}</option>`).join('');
+    $('scenarioSelect').innerHTML = scenarios.map(s => `<option value="${s}">${s.replace(/_/g,' ')}</option>`).join('');
+    $('engineTag').textContent = `orchestration engine: ${root.orchestration_engine}`;
+    $('statusLine').textContent = '';
+  } catch (err) {
+    $('statusLine').textContent = 'Could not reach the API. Start the backend and check the API base URL.';
+  }
+}
+
+function badge(cls, text) { return `<span class="risk-badge ${cls}">${text}</span>`; }
+
+function renderAgentCard(key, result) {
+  const degradedClass = result.degraded ? 'degraded' : '';
+  const degradedTag = result.degraded ? `<div class="degraded-tag">DEGRADED — FEED UNAVAILABLE</div>` : '';
+  const reasons = (result.reasons || []).map(r => `<li>${r}</li>`).join('');
+  return `
+    <div class="agent-card ${degradedClass}">
+      <div class="agent-name">${result.agent}</div>
+      ${degradedTag}
+      <div class="agent-signal ${result.signal}">${result.signal}</div>
+      <div class="agent-confidence">confidence ${result.confidence}%</div>
+      <ul class="agent-reasons">${reasons}</ul>
+    </div>
+  `;
+}
+
+function renderCitations(citations) {
+  if (!citations || citations.length === 0) {
+    return `<div class="no-citations">No document met the relevance threshold for this symbol/scenario — the RAG agent degraded rather than producing an uncited claim.</div>`;
+  }
+  return citations.map(c => `
+    <div class="citation">
+      <span class="citation-source">${c.source}</span><span class="citation-score">relevance ${c.relevance_score}</span>
+      <div class="citation-snippet">${c.snippet}</div>
+    </div>
+  `).join('');
+}
+
+function renderChain(chain) {
+  return `<ul class="chain-list">${chain.map(c => `<li>${c.replace(/^\d+\.\s*/, '')}</li>`).join('')}</ul>`;
+}
+
+function renderPersonalization(p) {
+  const guidance = p.personalization.guidance.map(g => `<li>${g}</li>`).join('');
+  const warnings = p.personalization.warnings.map(w => `<li>${w}</li>`).join('');
+  return `
+    <div class="panel">
+      <div class="risk-row"><span class="k">Investor</span><span class="v">${p.user_id} · ${p.risk_tolerance} risk tolerance</span></div>
+      <div class="risk-row"><span class="k">Overall risk level</span><span class="v">${badge(p.overall_risk_level, p.overall_risk_level)} (score ${p.overall_risk_score})</span></div>
+      <div class="risk-row"><span class="k">Portfolio concentration</span><span class="v">${(p.portfolio_concentration*100).toFixed(1)}% in largest holding</span></div>
+      <div class="risk-row"><span class="k">Behavior risk score</span><span class="v">${p.behavior_risk_score}</span></div>
+      <div class="risk-row"><span class="k">Agent weights applied</span><span class="v">${Object.entries(p.agent_weights_applied).map(([k,v]) => `${k.replace(' Agent','')} ${(v*100).toFixed(0)}%`).join(' · ')}</span></div>
+      <ul class="guidance-list">${guidance}</ul>
+      <ul class="warning-list">${warnings}</ul>
+    </div>
+  `;
+}
+
+async function loadLogs() {
+  const base = apiBase();
+  try {
+    const data = await fetch(`${base}/api/logs?limit=8`).then(r => r.json());
+    const rows = data.recent_sessions.map(s => `
+      <tr>
+        <td>${s.session_id}</td>
+        <td>${s.symbol}</td>
+        <td class="signal-${s.final_signal}">${s.final_signal}</td>
+        <td>${s.confidence}%</td>
+        <td>${s.scenario}</td>
+        <td>${s.degraded_agent_count}</td>
+        <td>${s.total_latency_ms} ms</td>
+        <td>${s.signal_accuracy_proxy === null ? '—' : (s.signal_accuracy_proxy ? 'match' : 'miss')}</td>
+      </tr>
+    `).join('');
+    const m = data.aggregate_metrics;
+    const metricsStrip = m.sessions_logged ? `
+      <div class="metrics-strip">
+        <div class="metric"><span class="num">${m.sessions_logged}</span><span class="label">sessions logged</span></div>
+        <div class="metric"><span class="num">${m.avg_total_latency_ms ?? '—'}</span><span class="label">avg latency (ms)</span></div>
+        <div class="metric"><span class="num">${m.signal_accuracy_proxy_rate != null ? (m.signal_accuracy_proxy_rate*100).toFixed(0)+'%' : '—'}</span><span class="label">accuracy proxy vs 30d return</span></div>
+        <div class="metric"><span class="num">${m.sessions_with_degraded_agents}</span><span class="label">sessions with degraded agents</span></div>
+      </div>` : '';
+
+    return `
+      <h2 class="section-title">Performance log</h2>
+      <div class="panel">
+        ${metricsStrip}
+        <table>
+          <thead><tr><th>Session</th><th>Symbol</th><th>Signal</th><th>Conf.</th><th>Scenario</th><th>Degraded</th><th>Latency</th><th>Accuracy proxy</th></tr></thead>
+          <tbody>${rows || '<tr><td colspan="8">No sessions logged yet.</td></tr>'}</tbody>
+        </table>
+      </div>
+    `;
+  } catch (err) {
+    return '';
+  }
+}
+
+async function runAnalysis() {
+  const base = apiBase();
+  const symbol = $('symbolSelect').value;
+  const user_id = $('userSelect').value;
+  const scenario = $('scenarioSelect').value;
+
+  $('runBtn').disabled = true;
+  $('runBtn').textContent = 'Running...';
+  $('statusLine').textContent = '';
+
+  try {
+    const res = await fetch(`${base}/api/analyze`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ symbol, user_id, scenario }),
+    });
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      throw new Error(err.detail || `Request failed with status ${res.status}`);
+    }
+    const data = await res.json();
+    render(data);
+    $('resultsLogs')?.remove();
+    const logsHtml = await loadLogs();
+    $('results').insertAdjacentHTML('beforeend', `<div id="resultsLogs">${logsHtml}</div>`);
+  } catch (err) {
+    $('statusLine').textContent = err.message;
+  } finally {
+    $('runBtn').disabled = false;
+    $('runBtn').textContent = 'Run analysis';
+  }
+}
+
+function render(data) {
+  const synth = data.synthesis;
+  const banner = $('scenarioBanner');
+  if (data.scenario_simulated && data.scenario_simulated !== 'none') {
+    banner.classList.add('active');
+    banner.textContent = `Simulated scenario: ${data.scenario_simulated.replace(/_/g,' ')} — watch how the affected agent degrades and the synthesis layer compensates.`;
+  } else {
+    banner.classList.remove('active');
+  }
+
+  const html = `
+    <div class="hero">
+      <div class="hero-signal ${synth.final_signal}">${synth.final_signal}</div>
+      <div class="hero-meta">
+        <div class="hero-symbol">${data.symbol} — ${data.stock_name}</div>
+        <div class="hero-confidence">confidence ${synth.confidence}% · weighted score ${synth.weighted_score}</div>
+        <div class="hero-decision">${synth.decision}</div>
+      </div>
+    </div>
+
+    <h2 class="section-title">Signal classification — 4 independent agents, run in parallel</h2>
+    <div class="agent-grid">
+      ${renderAgentCard('technical', data.agents.technical)}
+      ${renderAgentCard('fundamental', data.agents.fundamental)}
+      ${renderAgentCard('sentiment', data.agents.sentiment)}
+      ${renderAgentCard('rag', data.agents.rag)}
+    </div>
+
+    <div class="two-col">
+      <div>
+        <h2 class="section-title">Source attribution (RAG-grounded)</h2>
+        <div class="panel">${renderCitations(synth.citations)}</div>
+      </div>
+      <div>
+        <h2 class="section-title">Reasoning chain</h2>
+        <div class="panel">${renderChain(data.reasoning_chain)}</div>
+      </div>
+    </div>
+
+    <h2 class="section-title">Personalized guidance — ${data.personalization.user_id}</h2>
+    ${renderPersonalization(data.personalization)}
+
+    <div id="resultsLogs"></div>
+  `;
+
+  $('results').innerHTML = html;
+}
+
+$('runBtn').addEventListener('click', runAnalysis);
+loadOptions();
+</script>
+
+</body>
+</html>

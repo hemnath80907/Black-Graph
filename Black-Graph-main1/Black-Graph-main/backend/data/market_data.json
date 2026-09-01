@@ -1,0 +1,65 @@
+{
+  "RELIANCE": {
+    "name": "Reliance Industries Ltd",
+    "technical": {
+      "price": 1520.4,
+      "sma20": 1480.2,
+      "rsi": 63,
+      "volume": 15000000,
+      "avg_volume": 10000000
+    },
+    "fundamental": {
+      "revenue_growth": 14.8,
+      "profit_growth": 11.2,
+      "debt_ratio": 0.32
+    },
+    "sentiment": {
+      "positive_news": 8,
+      "negative_news": 3,
+      "sentiment_score": 0.42
+    },
+    "forward_return_30d_pct": 3.1
+  },
+  "TCS": {
+    "name": "Tata Consultancy Services Ltd",
+    "technical": {
+      "price": 3985.0,
+      "sma20": 4050.5,
+      "rsi": 41,
+      "volume": 3200000,
+      "avg_volume": 4100000
+    },
+    "fundamental": {
+      "revenue_growth": 7.1,
+      "profit_growth": 6.4,
+      "debt_ratio": 0.02
+    },
+    "sentiment": {
+      "positive_news": 4,
+      "negative_news": 6,
+      "sentiment_score": -0.18
+    },
+    "forward_return_30d_pct": -1.8
+  },
+  "INFY": {
+    "name": "Infosys Ltd",
+    "technical": {
+      "price": 1680.2,
+      "sma20": 1710.0,
+      "rsi": 38,
+      "volume": 6800000,
+      "avg_volume": 7500000
+    },
+    "fundamental": {
+      "revenue_growth": 4.2,
+      "profit_growth": 2.1,
+      "debt_ratio": 0.05
+    },
+    "sentiment": {
+      "positive_news": 3,
+      "negative_news": 5,
+      "sentiment_score": -0.25
+    },
+    "forward_return_30d_pct": -0.6
+  }
+}
